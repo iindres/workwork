@@ -21,8 +21,8 @@ const automobilis = {
 
 automobilis.isvedimas = function () {
     console.log(`Automobilis: ${this.pavadinimas} ${this.modelis}, 
-        ${this.metai} m., ${this.rida} km., savininkas: 
-        ${this.savininkas.vardas} ${this.savininkas.pavarde}`);
+        ${this.metai} m., ${this.rida} km., savininkas: ${this.savininkas.vardas} 
+        ${this.savininkas.pavarde}`);
 }
 
 automobilis.isvedimas();
