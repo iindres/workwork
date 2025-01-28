@@ -1,0 +1,111 @@
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  background-color: rgba(222, 140, 244, 0.332);
+  color: white;
+}
+
+.container {
+  text-align: center;
+  h1 {
+    font-size: 3.5rem;
+  }
+  .info {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    #level {
+      font-size: 2rem;
+      margin-top: 20px;
+    }
+  }
+  #restart {
+    font-size: 1.5rem;
+    padding: 10px 20px;
+    color: white;
+    background-color: rgb(215, 180, 238);
+    border-style: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    &:hover {
+      background-color: rgb(215, 180, 238, 0.8);
+    }
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(10, 40px);
+  grid-template-rows: repeat(10, 40px);
+  gap: 2px;
+}
+
+.grid div {
+  width: 40px;
+  height: 40px;
+}
+
+.wall {
+  background-color: rgb(215, 180, 238);
+}
+
+.pacman {
+  background-color: yellow;
+  border-radius: 50%;
+}
+
+.food {
+  background-color: white;
+}
+
+.blinky {
+  background-color: red;
+}
+
+.pinky {
+  background-color: pink;
+}
+
+.inky {
+  background-color: cyan;
+}
+
+.clyde {
+  background-color: orange;
+}
+
+.ghost {
+  border-radius: 50%;
+}
+
+.dancing {
+  animation: dance 1s infinite alternate;
+}
+
+@keyframes dance {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-10px);
+  }
+}
+
+#congratulations,
+#game-over {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3rem;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 20px;
+  border-radius: 10px;
+  z-index: 1000;
+  text-align: center;
+}
