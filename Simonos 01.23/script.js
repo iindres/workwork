@@ -1,4 +1,6 @@
-// 1.
+// 1. Parašykite programą, kuri suskaičiuotų , kiek duotas skaičius a 
+// turi lyginių ir nelyginių skaitmenų. @example: 63258 => ‘3 skaičiai 
+// lyginiai, 2 nelyginiai’
 
 function skaicius(n) {
     let lyginis = 0;
@@ -19,7 +21,10 @@ function skaicius(n) {
 
 console.log(skaicius(63258));
 
-// 2.
+// 2. Parašykite funkciją, kuri priimtų parametru du tekstus ir išvestų 
+// kuris tekstas ilgesnis ir tą tekstą @example: (‘abc’, ‘b’) => 
+// ‘tekstas “abc” yra ilgesnis, jo ilgis 3 simboliai’ (‘abcd’, ‘abcd’) => 
+// ‘abu tekstai lygus, jų ilgis 4 simboliai’
 
 function duTekstai(a, b) {
     if (a.length > b.length) {
@@ -37,7 +42,14 @@ console.log(duTekstai("asdfgh", "asdfghi"));
 console.log(duTekstai("asdfghi", "asdfgh"));
 console.log(duTekstai("asdfgh", "asdfgh"));
 
-// 3. 
+// 3. Sukurkite tuščią masyvą.
+// • Įdėkite 4 elementus į masyvą
+// • Pridėkite 1 elementą į masyvo galą
+// • Ištrinkite vidurinį elementą ir išveskite jį į consolę
+// • Išveskite į consolę masyvą pasirašytos f-jos pagalba.
+// • Pakeiskite 2 elementą nauja reikšme
+// • Pridėkite du naujus elementus į masyvo pradžią
+// • Išveskite į consolę masyvą pasirašytos f-jos pagalba.
 
 let masyvas = [2, 5, "dkf", 85];
 
@@ -62,4 +74,30 @@ console.log(masyvas);
 
 print(masyvas);
 
-// 4. 
+// 4. Parašykite f-ją kur konvertuotų masyvą į stringą 
+// @example: arrayToString([1, 2, 3, 4, 5, 6]) 
+// ➞ "123456" arrayToString(["a", "b", "c", "d", "e", "f"]) 
+// ➞ "abcdef" arrayToString([1, 2, 3, "a", "s", "dAAAA"]) 
+// ➞ "123asdAAAA"
+
+function arrayToString(array) {
+    return array.join('');
+}
+
+console.log(arrayToString([1, 2, 3, 4, 5, 6])); // "123456"
+console.log(arrayToString(["a", "b", "c", "d", "e", "f"])); // "abcdef"
+console.log(arrayToString([1, 2, 3, "a", "s", "dAAAA"])); // "123asdAAAA"
+
+// 5. Parašykite f-ją kur konvertuotų masyvą į stringą 
+// @example: arrayToString([1, 2, 3, 4, 5, 6]) 
+// ➞ "123456" arrayToString(["a", "b", "c", "d", "e", "f"]) 
+// ➞ "abcdef" arrayToString([1, 2, 3, "a", "s", "dAAAA"]) 
+// ➞ "123asdAAAA"
+
+function reverse(array) {
+    return array.reverse();
+}
+
+console.log(reverse([1, 2, 3, 4])); // [4, 3, 2, 1]
+console.log(reverse([9, 9, 2, 3, 4])); // [4, 3, 2, 9, 9]
+console.log(reverse([])); // []
