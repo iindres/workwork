@@ -130,15 +130,36 @@ console.log(employees);
 
 
 function createHtmlList(masyvas) {
-
-    document.getElementById = sarasas1;
-
-    const text = ['<ol><li>Alice</li><li>Bob</li><li>Charlie</li><li>David</li><li>Eve</li><li>Frank</li><li>Grace</li><li>Hannah</li><li>Isaac</li><li>Jack</li><li>Karen</li><li>Liam</li><li>Mia</li><li>Nathan</li><li>Olivia</li><li>Peter</li><li>Quinn</li><li>Rachel</li><li>Sophia</li><li>Tom</li></ol>'];
-
-    const sarasas1 = "<li>" + text.join("</li><li>") + "</li>";
-    sarasoElementas.innerHTML = sarasas1;
-    console.log(sarasas1);
-    // const sarasoTekstas = document.querySelector("masyvas");
-    // sarasoTekstas.innerHTML = text;
-
+    const html = masyvas.map((darbuotojas) => `<li>${darbuotojas}</li>`).join('');
+    return `<ol>${html}</ol>`;
 }
+
+const darbuotojai = createHtmlList(employees);
+
+const divElementas = document.querySelector('.sarasas1');
+
+divElementas.innerHTML = darbuotojai;
+
+// 9. Patobulinkite funkciją createHtmlList pridėdami jai papildomą parametrą rezimas. createHtmlList(masyvas, rezimas). Jei rezimas yra 
+// undefined: grąžinkite tą patį numeruotą sąrašą
+// ne skaičius: grąžinkite tuščią string reikšmę: “”
+// 1: grąžinkite nenumeruotą sąrašą.
+// 2: grąžinkite numeruotą sąrašą.
+
+function createHtmlList(masyvas, rezimas) {
+    if (rezimas === 1) {
+        const html = masyvas.map((darbuotojas) => `<li>${darbuotojas}</li>`).join('');
+        return `<ul>${html}</ul>`;
+    } else if (rezimas === 2 || rezimas === undefined) {
+        const html = masyvas.map((darbuotojas) => `<li>${darbuotojas}</li>`).join('');
+        return `<ol>${html}</ol>`;
+    } else {
+        return '';
+    }
+}
+
+const Darbuotojai = createHtmlList(employees, 1);
+
+const divElementas = document.querySelector('.sarasas1');
+
+divElementas.innerHTML = darbuotojai;

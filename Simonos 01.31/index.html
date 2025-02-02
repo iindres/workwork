@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guess the Number Game</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Žaidimas atspėk skaičių</h1>
+      <div class="game-settings">
+        <label for="maxNumber">Pasirinkti skaičių:</label>
+        <select id="maxNumber">
+          <option value="10">10</option>
+          <option value="100" selected>100</option>
+          <option value="1000">1000</option>
+        </select>
+      </div>
+      <div class="game-area">
+        <input
+          type="text"
+          id="guessInput"
+          placeholder="Įveskite savo spėjimą"
+        />
+        <button id="guessButton">Spėti</button>
+        <button id="newGameButton">Naujas Žaidimas</button>
+        <div id="messageArea"></div>
+        <div id="attemptsArea"></div>
+        <img
+          id="resultImage"
+          src="./congratulations.png"
+          alt="Congratulations"
+          style="display: none"
+        />
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

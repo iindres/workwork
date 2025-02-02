@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- Pridėkite įvesties laukelį, kuriame būtų įrašomas mygtuko pavadinimas (vidinis mygtuko tekstas), šalia jo mygtukas 
+     “pritaikyti”, ant kurio paspaudus pasikeis my-button tekstas -->
+
+    <input type="text" id="my-input" />
+
+    <button id="my-button">Pritaikyti</button>
+
+    <!-- Pridėkite fono spalvos įvesties laukelį , šalia jo mygtukas “pritaikyti”, ant kurio paspaudus pasikeis 
+     my-button fono spalva.  -->
+
+    <input type="color" id="my-color" />
+
+    <button id="my-color-button">Pritaikyti</button>
+
+    <!-- Pridėkite įvesties laukelį skaičiui, kuriuo nusakysite, kiek pikselių reikia užapvalinti mygtuką. 
+     Įprasta laukelio reikšmė: 0; -->
+
+    <input type="number" id="my-pixels" value="0" />
+
+    <!-- Pridėkite įvesties laukelį skaičiui, kuriuo nusakysite mygtuko šoninių vidinių paraščių plotį; -->
+
+    <input type="number" id="my-padding" value="0" />
+
+    <!-- Pridėkite įvesties laukelį skaičiui, kuriuo nusakysite mygtuko viršutinių ir apatinių vidinių paraščių aukštį; -->
+
+    <input type="number" id="my-padding-top-bottom" value="0" />
+
+    <!-- Pridėkite įvesties laukelius skaičiui ir spalvai, kuriuo nusakysite, kokio storio ir spalvos turėtų 
+     būti kraštinė; -->
+
+    <input type="number" id="my-border-width" value="0" />
+
+    <!-- Pridėkite select elementą pasirinkimui, koks turėtų būti  kraštinės stilius (taškuotas, brūkšniuotas…); -->
+
+    <select id="my-border-style">
+      <option value="solid">Solid</option>
+      <option value="dotted">Dotted</option>
+      <option value="dashed">Dashed</option>
+      <option value="double">Double</option>
+      <option value="groove">Groove</option>
+      <option value="ridge">Ridge</option>
+      <option value="inset">Inset</option>
+      <option value="outset">Outset</option>
+    </select>
+
+    <script src="script.js"></script>
+  </body>
+</html>
