@@ -3,7 +3,6 @@ const scoreDisplay = document.getElementById('score');
 const livesDisplay = document.getElementById('lives');
 const levelDisplay = document.getElementById('level');
 const restartButton = document.getElementById('restart');
-const confettiButton = document.getElementById('confettiButton');
 const startButton = document.getElementById('start'); // Add start button
 let score = 0;
 let level = 1;
@@ -240,7 +239,7 @@ function gameComplete() {
     ghosts.forEach(ghost => clearInterval(ghost.timerId));
     document.removeEventListener('keydown', movePacman);
     showCongratulations();
-    // Add confetti and ghost dancing logic here
+    // Add ghost dancing logic here
     // Example: animate ghosts in a loop
     ghosts.forEach(ghost => {
         squares[ghost.currentIndex].classList.add('dancing');
@@ -248,8 +247,6 @@ function gameComplete() {
 }
 
 restartButton.addEventListener('click', restartGame);
-
-confettiButton.addEventListener('click', startConfetti);
 
 function restartGame() {
     location.reload(); // Refresh the page
@@ -272,44 +269,6 @@ function showCongratulations() {
     congratsMessage.textContent = 'CONGRATULATIONS!!!';
     document.body.appendChild(congratsMessage);
     startConfetti();
-    document.getElementById('confettiButton').style.display = 'block';
-}
-
-function hideCongratulations() {
-    const congratsMessage = document.getElementById('congratulations');
-    if (congratsMessage) {
-        congratsMessage.remove();
-    }
-}
-
-function startConfetti() {
-    const duration = 5 * 1000;
-    const end = Date.now() + duration;
-
-    const count = 200;
-    const defaults = {
-        origin: { y: 0.7 }
-    };
-
-    function fire(particleRatio, opts) {
-        confetti({
-            ...defaults,
-            ...opts,
-            particleCount: Math.floor(count * particleRatio)
-        });
-    }
-
-    (function frame() {
-        fire(0.25, { spread: 26, startVelocity: 55 });
-        fire(0.2, { spread: 60 });
-        fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
-        fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
-        fire(0.1, { spread: 120, startVelocity: 45 });
-
-        if (Date.now() < end) {
-            requestAnimationFrame(frame);
-        }
-    }());
 }
 
 // Initial setup
@@ -330,7 +289,6 @@ function startGame() {
 startButton.addEventListener('click', startGame);
 
 restartButton.addEventListener('click', restartGame);
-confettiButton.addEventListener('click', startConfetti);
 
 // Touchscreen controls
 document.getElementById('up').addEventListener('click', () => movePacman({ key: 'ArrowUp' }));
