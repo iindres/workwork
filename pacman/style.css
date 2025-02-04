@@ -239,6 +239,7 @@ body {
   }
 
   body {
-    touch-action: manipulation;
+    touch-action: none;
+    overflow: hidden;
   }
 }

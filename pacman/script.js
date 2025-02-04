@@ -329,16 +329,19 @@ let touchEndX = 0;
 let touchEndY = 0;
 
 function handleTouchStart(e) {
+    if (!gameStarted) return;
     touchStartX = e.changedTouches[0].screenX;
     touchStartY = e.changedTouches[0].screenY;
 }
 
 function handleTouchMove(e) {
+    if (!gameStarted) return;
     touchEndX = e.changedTouches[0].screenX;
     touchEndY = e.changedTouches[0].screenY;
 }
 
 function handleTouchEnd() {
+    if (!gameStarted) return;
     const deltaX = touchEndX - touchStartX;
     const deltaY = touchEndY - touchStartY;
 
