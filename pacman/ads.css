@@ -91,27 +91,39 @@ body {
 }
 
 .food {
-  background-color: white;
+  transform-style: preserve-3d;
+  border-radius: 50px;
+  text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
 }
 
 .blinky {
-  background-color: red;
+  color: red;
 }
 
 .pinky {
-  background-color: pink;
+  color: pink;
 }
 
 .inky {
-  background-color: cyan;
+  color: cyan;
 }
 
 .clyde {
-  background-color: orange;
+  color: orange;
 }
 
 .ghost {
   border-radius: 50%;
+  transform-style: preserve-3d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 35px;
+  text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.837);
 }
 
 .dancing {
@@ -148,9 +160,16 @@ body {
   0% {
     transform: translateY(0);
   }
-  100% {
+  50% {
     transform: translateY(-10px);
   }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.dancing {
+  animation: dance 0.5s infinite;
 }
 
 #congratulations,
