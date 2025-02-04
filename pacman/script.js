@@ -318,10 +318,10 @@ startButton.addEventListener('click', startGame);
 restartButton.addEventListener('click', restartGame);
 
 // Touchscreen controls
-document.getElementById('up').addEventListener('click', () => movePacman({ key: 'ArrowUp' }));
-document.getElementById('down').addEventListener('click', () => movePacman({ key: 'ArrowDown' }));
-document.getElementById('left').addEventListener('click', () => movePacman({ key: 'ArrowLeft' }));
-document.getElementById('right').addEventListener('click', () => movePacman({ key: 'ArrowRight' }));
+// document.getElementById('up').addEventListener('click', () => movePacman({ key: 'ArrowUp' }));
+// document.getElementById('down').addEventListener('click', () => movePacman({ key: 'ArrowDown' }));
+// document.getElementById('left').addEventListener('click', () => movePacman({ key: 'ArrowLeft' }));
+// document.getElementById('right').addEventListener('click', () => movePacman({ key: 'ArrowRight' }));
 
 let touchStartX = 0;
 let touchStartY = 0;
