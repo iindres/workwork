@@ -178,3 +178,61 @@ body {
   z-index: 1000;
   text-align: center;
 }
+
+@media (max-width: 600px) {
+  .container h1 {
+    font-size: 2rem;
+  }
+
+  .container .info {
+    font-size: 1rem;
+  }
+
+  .container .info #level {
+    font-size: 1.5rem;
+  }
+
+  .buttons {
+    flex-direction: column;
+  }
+
+  #start,
+  #restart {
+    font-size: 1rem;
+    padding: 8px 16px;
+    margin: 10px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(10, 30px);
+    grid-template-rows: repeat(10, 30px);
+    gap: 1px;
+  }
+
+  .controls {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+  }
+
+  .control-button {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+  }
+
+  #congratulations,
+  #game-over {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 1000;
+    text-align: center;
+  }
+}
