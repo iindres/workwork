@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <form id="checkin-form">
+      <label for="firstName">Darbuotojo vardas:</label>
+      <input type="text" id="firstName" minlength="3" maxlength="50" required />
+      <span id="firstNameHelp" class="error"></span><br />
+
+      <label for="lastName">Darbuotojo pavardė:</label>
+      <input type="text" id="lastName" minlength="3" maxlength="50" required />
+      <span id="lastNameHelp" class="error"></span><br />
+
+      <label for="employeeNumber">Darbuotojo numeris:</label>
+      <input type="text" id="employeeNumber" maxlength="7" required />
+      <span id="employeeNumberHelp" class="error"></span><br />
+
+      <button type="submit">Check-in</button>
+    </form>
+    <script src="script.js"></script>
+  </body>
+</html>

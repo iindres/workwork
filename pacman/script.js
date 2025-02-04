@@ -90,10 +90,10 @@ class Ghost {
 }
 
 let ghosts = [
-    new Ghost('blinky', 11, 200),
-    new Ghost('pinky', 13, 300),
-    new Ghost('inky', 16, 250),
-    new Ghost('clyde', 18, 350)
+    new Ghost('blinky', 11, 400), // Slower speed
+    new Ghost('pinky', 13, 500),  // Slower speed
+    new Ghost('inky', 16, 450),   // Slower speed
+    new Ghost('clyde', 18, 550)   // Slower speed
 ];
 
 // Draw ghosts onto the grid
@@ -252,47 +252,19 @@ restartButton.addEventListener('click', restartGame);
 confettiButton.addEventListener('click', startConfetti);
 
 function restartGame() {
-    hideCongratulations();
-    document.getElementById('confettiButton').style.display = 'none';
-    level = 1;
-    score = 0;
-    lives = 5;
-    scoreDisplay.textContent = score;
-    livesDisplay.textContent = lives;
-    levelDisplay.textContent = `Level ${level}`;
-    gameStarted = false; // Reset the flag when the game is restarted
-    startButton.style.display = 'block'; // Show the start button again
+    location.reload(); // Refresh the page
+}
 
-    // Remove existing Pac-Man
-    squares[pacmanCurrentIndex].classList.remove('pacman');
-
-    // Clear existing ghost intervals
-    ghosts.forEach(ghost => clearInterval(ghost.timerId));
-
-    // Reset the game board
-    squares.forEach(square => {
-        square.classList.remove('pacman', 'ghost', 'food', 'wall');
-    });
-
-    // Redraw the initial game board
+// Initial setup
+function initialSetup() {
     createBoard();
-
-    // Reset Pac-Man position
-    pacmanCurrentIndex = 40;
-    squares[pacmanCurrentIndex].classList.add('pacman');
-
-    // Reset ghosts and start moving them
-    ghosts.forEach(ghost => {
-        // Reset ghost position and movement logic
-        squares[ghost.currentIndex].classList.remove('ghost');
-        ghost.currentIndex = ghost.startIndex; // Assuming each ghost has a startIndex property
-        squares[ghost.currentIndex].classList.add('ghost');
-        moveGhost(ghost);
-    });
-
-    // Re-add event listener for Pac-Man movement
+    squares[pacmanCurrentIndex].classList.add('pacman'); // Ensure Pac-Man is added at the start
+    drawGhosts();
     document.addEventListener('keydown', movePacman);
 }
+
+// Call initial setup on page load
+initialSetup();
 
 function showCongratulations() {
     const congratsMessage = document.createElement('div');
