@@ -322,3 +322,42 @@ document.getElementById('up').addEventListener('click', () => movePacman({ key: 
 document.getElementById('down').addEventListener('click', () => movePacman({ key: 'ArrowDown' }));
 document.getElementById('left').addEventListener('click', () => movePacman({ key: 'ArrowLeft' }));
 document.getElementById('right').addEventListener('click', () => movePacman({ key: 'ArrowRight' }));
+
+let touchStartX = 0;
+let touchStartY = 0;
+let touchEndX = 0;
+let touchEndY = 0;
+
+function handleTouchStart(e) {
+    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
+}
+
+function handleTouchMove(e) {
+    touchEndX = e.changedTouches[0].screenX;
+    touchEndY = e.changedTouches[0].screenY;
+}
+
+function handleTouchEnd() {
+    const deltaX = touchEndX - touchStartX;
+    const deltaY = touchEndY - touchStartY;
+
+    if (Math.abs(deltaX) > Math.abs(deltaY)) {
+        if (deltaX > 0) {
+            movePacman({ key: 'ArrowRight' });
+        } else {
+            movePacman({ key: 'ArrowLeft' });
+        }
+    } else {
+        if (deltaY > 0) {
+            movePacman({ key: 'ArrowDown' });
+        } else {
+            movePacman({ key: 'ArrowUp' });
+        }
+    }
+}
+
+// Add touch event listeners
+document.addEventListener('touchstart', handleTouchStart, false);
+document.addEventListener('touchmove', handleTouchMove, false);
+document.addEventListener('touchend', handleTouchEnd, false);
