@@ -3,9 +3,12 @@ const scoreDisplay = document.getElementById('score');
 const livesDisplay = document.getElementById('lives');
 const levelDisplay = document.getElementById('level');
 const restartButton = document.getElementById('restart');
+const confettiButton = document.getElementById('confettiButton');
+const startButton = document.getElementById('start'); // Add start button
 let score = 0;
 let level = 1;
 let lives = 5;
+let gameStarted = false; // Add a flag to check if the game has started
 
 // Define multiple layouts for different levels
 const layouts = [
@@ -87,10 +90,10 @@ class Ghost {
 }
 
 let ghosts = [
-    new Ghost('blinky', 11, 250),
-    new Ghost('pinky', 13, 400),
-    new Ghost('inky', 16, 300),
-    new Ghost('clyde', 18, 500)
+    new Ghost('blinky', 11, 200),
+    new Ghost('pinky', 13, 300),
+    new Ghost('inky', 16, 250),
+    new Ghost('clyde', 18, 350)
 ];
 
 // Draw ghosts onto the grid
@@ -104,6 +107,7 @@ drawGhosts();
 
 // Move ghosts
 function moveGhosts() {
+    if (!gameStarted) return; // Prevent ghosts from moving if the game hasn't started
     ghosts.forEach(ghost => moveGhost(ghost));
 }
 
@@ -112,6 +116,8 @@ function moveGhost(ghost) {
     let direction = directions[Math.floor(Math.random() * directions.length)];
 
     ghost.timerId = setInterval(function () {
+        if (!gameStarted) return; // Prevent ghosts from moving if the game hasn't started
+
         // If the next square does NOT contain a wall and does NOT contain a ghost
         if (!squares[ghost.currentIndex + direction].classList.contains('wall') &&
             !squares[ghost.currentIndex + direction].classList.contains('ghost')) {
@@ -121,7 +127,7 @@ function moveGhost(ghost) {
             ghost.currentIndex += direction;
             squares[ghost.currentIndex].classList.add(ghost.className, 'ghost');
         } else {
-            // Change direction
+            // Change direction immediately
             direction = directions[Math.floor(Math.random() * directions.length)];
         }
 
@@ -131,10 +137,14 @@ function moveGhost(ghost) {
         }
     }, ghost.speed);
 }
-moveGhosts();
 
 // Move Pac-Man
 function movePacman(e) {
+    if (!gameStarted) {
+        alert('Click start to begin the game!');
+        return;
+    }
+
     squares[pacmanCurrentIndex].classList.remove('pacman');
 
     switch (e.key) {
@@ -239,22 +249,49 @@ function gameComplete() {
 
 restartButton.addEventListener('click', restartGame);
 
+confettiButton.addEventListener('click', startConfetti);
+
 function restartGame() {
+    hideCongratulations();
+    document.getElementById('confettiButton').style.display = 'none';
     level = 1;
     score = 0;
     lives = 5;
     scoreDisplay.textContent = score;
     livesDisplay.textContent = lives;
     levelDisplay.textContent = `Level ${level}`;
-    ghosts.forEach(ghost => clearInterval(ghost.timerId)); // Clear existing ghost intervals
-    layout = layouts[level - 1];
+    gameStarted = false; // Reset the flag when the game is restarted
+    startButton.style.display = 'block'; // Show the start button again
+
+    // Remove existing Pac-Man
+    squares[pacmanCurrentIndex].classList.remove('pacman');
+
+    // Clear existing ghost intervals
+    ghosts.forEach(ghost => clearInterval(ghost.timerId));
+
+    // Reset the game board
+    squares.forEach(square => {
+        square.classList.remove('pacman', 'ghost', 'food', 'wall');
+    });
+
+    // Redraw the initial game board
     createBoard();
+
+    // Reset Pac-Man position
     pacmanCurrentIndex = 40;
     squares[pacmanCurrentIndex].classList.add('pacman');
-    drawGhosts();
-    moveGhosts();
+
+    // Reset ghosts and start moving them
+    ghosts.forEach(ghost => {
+        // Reset ghost position and movement logic
+        squares[ghost.currentIndex].classList.remove('ghost');
+        ghost.currentIndex = ghost.startIndex; // Assuming each ghost has a startIndex property
+        squares[ghost.currentIndex].classList.add('ghost');
+        moveGhost(ghost);
+    });
+
+    // Re-add event listener for Pac-Man movement
     document.addEventListener('keydown', movePacman);
-    hideCongratulations();
 }
 
 function showCongratulations() {
@@ -262,7 +299,8 @@ function showCongratulations() {
     congratsMessage.id = 'congratulations';
     congratsMessage.textContent = 'CONGRATULATIONS!!!';
     document.body.appendChild(congratsMessage);
-    confetti();
+    startConfetti();
+    document.getElementById('confettiButton').style.display = 'block';
 }
 
 function hideCongratulations() {
@@ -272,26 +310,58 @@ function hideCongratulations() {
     }
 }
 
-function confetti() {
+function startConfetti() {
     const duration = 5 * 1000;
     const end = Date.now() + duration;
 
+    const count = 200;
+    const defaults = {
+        origin: { y: 0.7 }
+    };
+
+    function fire(particleRatio, opts) {
+        confetti({
+            ...defaults,
+            ...opts,
+            particleCount: Math.floor(count * particleRatio)
+        });
+    }
+
     (function frame() {
-        confetti({
-            particleCount: 5,
-            angle: 60,
-            spread: 55,
-            origin: { x: 0 }
-        });
-        confetti({
-            particleCount: 5,
-            angle: 120,
-            spread: 55,
-            origin: { x: 1 }
-        });
+        fire(0.25, { spread: 26, startVelocity: 55 });
+        fire(0.2, { spread: 60 });
+        fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
+        fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
+        fire(0.1, { spread: 120, startVelocity: 45 });
 
         if (Date.now() < end) {
             requestAnimationFrame(frame);
         }
     }());
 }
+
+// Initial setup
+function initialSetup() {
+    createBoard();
+    squares[pacmanCurrentIndex].classList.add('pacman'); // Ensure Pac-Man is added at the start
+    drawGhosts();
+    document.addEventListener('keydown', movePacman);
+}
+
+// Start game function
+function startGame() {
+    startButton.style.display = 'none';
+    gameStarted = true; // Set the flag to true when the game starts
+    moveGhosts(); // Start moving the ghosts
+}
+
+startButton.addEventListener('click', startGame);
+
+restartButton.addEventListener('click', restartGame);
+confettiButton.addEventListener('click', startConfetti);
+
+// Touchscreen controls
+document.getElementById('up').addEventListener('click', () => movePacman({ key: 'ArrowUp' }));
+document.getElementById('down').addEventListener('click', () => movePacman({ key: 'ArrowDown' }));
+document.getElementById('left').addEventListener('click', () => movePacman({ key: 'ArrowLeft' }));
+document.getElementById('right').addEventListener('click', () => movePacman({ key: 'ArrowRight' }));
