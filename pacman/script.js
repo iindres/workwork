@@ -1,10 +1,10 @@
 const grid = document.querySelector('.grid');
-const scoreDisplay = document.getElementById('score');
+const foodLeftDisplay = document.getElementById('food-left'); // Update to food-left
 const livesDisplay = document.getElementById('lives');
 const levelDisplay = document.getElementById('level');
 const restartButton = document.getElementById('restart');
 const startButton = document.getElementById('start'); // Add start button
-let score = 0;
+let foodLeft = 0; // Change score to foodLeft
 let level = 1;
 let lives = 5;
 let gameStarted = false; // Add a flag to check if the game has started
@@ -39,7 +39,7 @@ const layouts = [
     [
         1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
         1, 2, 2, 1, 0, 0, 0, 2, 2, 1,
-        1, 1, 2, 1, 0, 1, 2, 1, 1, 1,
+        1, 1, 2, 1, 0, 1, 2, 1, 2, 1,
         1, 2, 2, 1, 0, 1, 2, 1, 2, 1,
         1, 0, 0, 2, 2, 1, 0, 2, 2, 1,
         1, 2, 1, 1, 1, 1, 0, 1, 2, 1,
@@ -56,6 +56,7 @@ const squares = [];
 function createBoard() {
     grid.innerHTML = '';
     squares.length = 0;
+    foodLeft = 0; // Reset foodLeft
     for (let i = 0; i < layout.length; i++) {
         const square = document.createElement('div');
         grid.appendChild(square);
@@ -68,8 +69,10 @@ function createBoard() {
             square.classList.add('wall');
         } else if (layout[i] === 2) {
             square.classList.add('food');
+            foodLeft++; // Count the food
         }
     }
+    foodLeftDisplay.textContent = foodLeft; // Display the initial food count
 }
 createBoard();
 
@@ -178,8 +181,8 @@ function movePacman(e) {
     // Pac-Man eats food
     if (squares[pacmanCurrentIndex].classList.contains('food')) {
         squares[pacmanCurrentIndex].classList.remove('food');
-        score++;
-        scoreDisplay.textContent = score;
+        foodLeft--; // Decrease foodLeft
+        foodLeftDisplay.textContent = foodLeft; // Update the display
     }
 
     // Check for game over
@@ -188,8 +191,8 @@ function movePacman(e) {
     }
 
     // Check for level completion
-    if (!squares.some(square => square.classList.contains('food'))) {
-        if (level < 3) {
+    if (foodLeft === 0) {
+        if (level < layouts.length) {
             nextLevel();
         } else {
             gameComplete();
@@ -223,8 +226,8 @@ function gameOver() {
 
 function nextLevel() {
     level++;
-    score = 0;
-    scoreDisplay.textContent = score;
+    foodLeft = 0; // Reset foodLeft
+    foodLeftDisplay.textContent = foodLeft; // Update the display
     levelDisplay.textContent = `Level ${level}`;
     ghosts.forEach(ghost => clearInterval(ghost.timerId)); // Clear existing ghost intervals
     layout = layouts[level - 1];
@@ -269,6 +272,30 @@ function showCongratulations() {
     congratsMessage.textContent = 'CONGRATULATIONS!!!';
     document.body.appendChild(congratsMessage);
     startConfetti();
+}
+
+function startConfetti() {
+    const duration = 5 * 1000;
+    const end = Date.now() + duration;
+
+    (function frame() {
+        confetti({
+            particleCount: 3,
+            angle: 60,
+            spread: 55,
+            origin: { x: 0 }
+        });
+        confetti({
+            particleCount: 3,
+            angle: 120,
+            spread: 55,
+            origin: { x: 1 }
+        });
+
+        if (Date.now() < end) {
+            requestAnimationFrame(frame);
+        }
+    }());
 }
 
 // Initial setup
