@@ -1,0 +1,178 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.wrapper {
+    max-width: 1220px;
+    margin: 200px auto;
+    color: #fff;
+    font-family: "Mulish", serif;
+    overflow: hidden;
+}
+
+.testimonials {
+    max-width: 1120px;
+    min-height: 450px;
+    background: linear-gradient(208.18deg, #67C3F3 9.05%, #5A98F2 76.74%);
+    border-radius: 24px;
+    position: relative;
+    padding: 60px 30px 60px 100px;
+    margin: 0 auto;
+    container-type: inline-size;
+}
+
+.dots1, .dots2{
+    position: absolute;
+}
+
+.dots1 {
+    left: -50px;
+    bottom: 40px;
+    z-index: -1;
+}
+
+.dots2 {
+    right: -50px;
+    top: -15px;
+}
+
+.title {
+    text-align: center;
+    font-weight: 700;
+    font-size: 36px;
+}
+
+.line {
+    background-color: #fff;
+    width: 56px;
+    height: 2px;
+    border-radius: 6px;
+    margin: 25px auto;
+    opacity: 0.5;
+}
+
+.slider {
+    position: relative; 
+    container-type: inline-size;  
+}
+
+.card {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    font-weight: 400;
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    width: 100cqw;
+}
+
+
+
+.card_client {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+
+.client_name {
+    font-weight: 700;
+    font-size: 22px;
+}
+
+.client_position {
+    font-size: 18px;
+}
+.card_text {
+    max-width: 420px;
+    font-size: 19px;
+    line-height: 1.5;
+    align-self: center;
+    margin-right: 0;
+    margin-left: auto;
+}
+
+.slider_nav {
+    display: flex;
+    justify-content: center;
+    margin-top: 42px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #5A98F2;
+    margin: 0 15px;
+    display: inline-block;
+    cursor: pointer;
+    opacity: 0.3;
+}
+
+.active {
+    opacity: 1;
+    transition: opacity 0.6s ease;
+}
+
+.prev {
+    rotate: 180deg;
+    margin-right: 90px;
+    cursor: pointer;
+    margin-bottom: 4px;
+    opacity: 0.3;
+}
+
+.next {
+    margin-left: 90px;
+    margin-top: 4px;
+    cursor: pointer;
+    opacity: 0.3;
+}
+
+.prev:hover, .next:hover {
+    opacity: 1;
+}
+
+@media (max-width: 1000px) {
+    .testimonials {
+        padding: 60px 30px 60px 30px;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .testimonials {
+       min-height: 500px;
+    }
+    .title {
+        font-size: 25px;
+    }
+    .card {
+        justify-content: space-around;
+    }
+    .client_name {
+        font-size: 20px;
+    }
+    .card_text {
+        margin-right: auto;
+        font-size: 16px;
+    }
+  }
+
+  @media (max-width: 460px) {
+    .testimonials {
+        padding: 30px 15px 30px 15px;
+        min-height: 530px;
+    }
+    .card {
+        padding: 0;
+    }
+    .prev, .next {
+        margin-left: auto;
+        margin-right: auto;
+    }
+   
+  }
